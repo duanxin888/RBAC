@@ -1,4 +1,0 @@
-INSERT INTO rbac.sys_role (id, name, type, status, remark, operator, operate_time, operate_ip) VALUES (1, '产品管理员', 1, 1, '产品管理', 'admin', '2019-07-21 17:12:59', '0:0:0:0:0:0:0:1');
-INSERT INTO rbac.sys_role (id, name, type, status, remark, operator, operate_time, operate_ip) VALUES (3, '订单管理员', 1, 1, '', 'admin', '2019-07-21 16:36:44', '0:0:0:0:0:0:0:1');
-INSERT INTO rbac.sys_role (id, name, type, status, remark, operator, operate_time, operate_ip) VALUES (8, '权限管理员', 1, 1, '', 'admin', '2019-07-22 15:25:12', '0:0:0:0:0:0:0:1');
-INSERT INTO rbac.sys_role (id, name, type, status, remark, operator, operate_time, operate_ip) VALUES (9, '公告管理员', 1, 1, '发布公告', 'admin', '2019-07-24 15:58:26', '0:0:0:0:0:0:0:1');
