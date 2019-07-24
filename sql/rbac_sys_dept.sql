@@ -1,0 +1,4 @@
+INSERT INTO rbac.sys_dept (id, name, parent_id, level, seq, remark, operator, operate_time, operate_ip) VALUES (1, '技术部', 0, '0', 1, '', 'system--update', '2019-07-20 10:01:05', '127.0.0.1');
+INSERT INTO rbac.sys_dept (id, name, parent_id, level, seq, remark, operator, operate_time, operate_ip) VALUES (2, '后端开发', 1, '0.1', 1, '开发服务端', 'system--update', '2019-07-19 17:01:07', '127.0.0.1');
+INSERT INTO rbac.sys_dept (id, name, parent_id, level, seq, remark, operator, operate_time, operate_ip) VALUES (3, '前端开发', 1, '0.1', 2, '开发webUI', 'system', '2019-07-20 07:51:33', '127.0.0.1');
+INSERT INTO rbac.sys_dept (id, name, parent_id, level, seq, remark, operator, operate_time, operate_ip) VALUES (10, '产品部', 0, '0', 2, '产品部门', 'admin', '2019-07-24 15:52:50', '0:0:0:0:0:0:0:1');

@@ -17,6 +17,7 @@ import javax.annotation.Resource;
 @RequestMapping("/sys/log")
 public class SysLogController {
 
+
     @Resource
     private SysLogService sysLogService;
 
