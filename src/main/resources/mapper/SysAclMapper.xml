@@ -45,7 +45,7 @@
       )
   </insert>
 
-  <insert id="insertSelective" parameterType="com.duanxin.model.SysAcl">
+  <insert id="insertSelective" parameterType="com.duanxin.model.SysAcl" keyProperty="id" useGeneratedKeys="true">
     insert into sys_acl
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="record.id != null">

@@ -42,7 +42,7 @@
       #{record.operateTime,jdbcType=TIMESTAMP}, #{record.operateIp,jdbcType=VARCHAR})
   </insert>
 
-  <insert id="insertSelective" parameterType="com.duanxin.model.SysUser">
+  <insert id="insertSelective" parameterType="com.duanxin.model.SysUser" keyProperty="id" useGeneratedKeys="true">
     insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="record.id != null">

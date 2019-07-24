@@ -32,6 +32,8 @@ public class SysDeptService {
     private SysDeptMapper sysDeptMapper;
     @Resource
     private SysUserMapper sysUserMapper;
+    @Resource
+    private SysLogService sysLogService;
 
     /**
      * @description 根据id删除数据
@@ -72,6 +74,7 @@ public class SysDeptService {
         sysDept.setOperateIp(IpUtil.getRemoteIp(RequestHolder.getCurrentRequest()));
 
         sysDeptMapper.insertSelective(sysDept);
+        sysLogService.saveDeptLog(null, sysDept);
     }
 
     /**
@@ -117,6 +120,8 @@ public class SysDeptService {
 
         // 更新数据
         updateWithChild(before, after);
+
+        sysLogService.saveDeptLog(before, after);
     }
 
     /**

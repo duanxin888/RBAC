@@ -32,6 +32,8 @@ public class SysRoleUserService {
     private SysRoleUserMapper sysRoleUserMapper;
     @Resource
     private SysUserMapper sysUserMapper;
+    @Resource
+    private SysLogService sysLogService;
 
     /**
      * @description 添加用户角色数据
@@ -51,6 +53,8 @@ public class SysRoleUserService {
         }
 
         updateRoleUser(roleId, userIdList);
+
+        sysLogService.saveRoleUserLog(roleId, originUserIdList, userIdList);
     }
 
     /**

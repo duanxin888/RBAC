@@ -31,6 +31,8 @@ public class SysAclService {
 
     @Resource
     private SysAclMapper sysAclMapper;
+    @Resource
+    private SysLogService sysLogService;
 
     /**
      * @description 分页查询权限信息
@@ -71,7 +73,9 @@ public class SysAclService {
         sysAcl.setOperateTime(new Date());
         sysAcl.setOperateIp(IpUtil.getRemoteIp(RequestHolder.getCurrentRequest()));
 
+
         sysAclMapper.insertSelective(sysAcl);
+        sysLogService.saveAclLog(null, sysAcl);
     }
 
     /**
@@ -97,6 +101,8 @@ public class SysAclService {
         after.setOperateTime(new Date());
 
         sysAclMapper.updateByPrimaryKeySelective(after);
+
+        sysLogService.saveAclLog(before, after);
     }
 
     /**

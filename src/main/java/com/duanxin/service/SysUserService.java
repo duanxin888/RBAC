@@ -30,6 +30,8 @@ public class SysUserService {
 
     @Resource
     private SysUserMapper sysUserMapper;
+    @Resource
+    private SysLogService sysLogService;
 
     /**
      * @description 获取所有用户数据
@@ -102,6 +104,8 @@ public class SysUserService {
         // todo: send email
 
         sysUserMapper.insertSelective(sysUser);
+
+        sysLogService.saveUserLog(null, sysUser);
     }
 
     /**
@@ -134,6 +138,8 @@ public class SysUserService {
         after.setOperateTime(new Date());
 
         sysUserMapper.updateByPrimaryKeySelective(after);
+
+        sysLogService.saveUserLog(before, after);
     }
 
     /**

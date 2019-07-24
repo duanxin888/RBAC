@@ -37,6 +37,8 @@ public class SysRoleService {
     private SysRoleAclMapper sysRoleAclMapper;
     @Resource
     private SysUserMapper sysUserMapper;
+    @Resource
+    private SysLogService sysLogService;
 
     /**
      * @description 根据角色集合获取用户集合
@@ -106,6 +108,8 @@ public class SysRoleService {
         sysRole.setOperateTime(new Date());
 
         sysRoleMapper.insertSelective(sysRole);
+
+        sysLogService.saveRoleLog(null, sysRole);
     }
 
     /**
@@ -131,6 +135,8 @@ public class SysRoleService {
         after.setOperator(RequestHolder.getCurrentUser().getUsername());
 
         sysRoleMapper.updateByPrimaryKeySelective(after);
+
+        sysLogService.saveRoleLog(before, after);
     }
 
     /**

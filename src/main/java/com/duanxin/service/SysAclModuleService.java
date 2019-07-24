@@ -32,6 +32,8 @@ public class SysAclModuleService {
     private SysAclModuleMapper sysAclModuleMapper;
     @Resource
     private SysAclMapper sysAclMapper;
+    @Resource
+    private SysLogService sysLogService;
 
     public void deleteById(Integer aclModuleId) {
         // 进行校验是否存在
@@ -72,6 +74,8 @@ public class SysAclModuleService {
         after.setOperator(RequestHolder.getCurrentUser().getUsername());
 
         updateWithChild(before, after);
+
+        sysLogService.saveAclModuleLog(before, after);
     }
 
     /**
@@ -96,6 +100,8 @@ public class SysAclModuleService {
         sysAclModule.setOperateTime(new Date());
 
         sysAclModuleMapper.insertSelective(sysAclModule);
+
+        sysLogService.saveAclModuleLog(null, sysAclModule);
     }
 
     private String getLevel(Integer id) {

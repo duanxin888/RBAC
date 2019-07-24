@@ -28,6 +28,8 @@ public class SysRoleAclService {
 
     @Resource
     private SysRoleAclMapper sysRoleAclMapper;
+    @Resource
+    private SysLogService sysLogService;
 
     /**
      * @description 添加角色权限数据
@@ -49,6 +51,8 @@ public class SysRoleAclService {
 
         // 进行保存操作
         updateRoleAcls(roleId, aclIdList);
+
+        sysLogService.saveRoleAclLog(roleId, originAclIdList, aclIdList);
     }
 
     /**

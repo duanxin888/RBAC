@@ -40,7 +40,7 @@
       #{recordoperateIp,jdbcType=VARCHAR})
   </insert>
 
-  <insert id="insertSelective" parameterType="com.duanxin.model.SysAclModule">
+  <insert id="insertSelective" parameterType="com.duanxin.model.SysAclModule" keyProperty="id" useGeneratedKeys="true">
     insert into sys_acl_module
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="record.id != null">
