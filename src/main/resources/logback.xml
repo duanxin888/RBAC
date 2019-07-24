@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- scan（默认为true）：当配置文件发生改变将会重新加载
+    scanPeriod：配置配置文件修改的间隔，只有当scan为true时才生效，默认单位为毫秒
+ -->
+<configuration scan="true" scanPeriod="60 seconds">
+
+    <!-- 将日志文件直接输出到控制台 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- 配置日志输出格式：日期 线程 日志名称 信息 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--<appender name="permission" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        &lt;!&ndash; ${catalina.home}:表示当前tomcat服务器下的主路径 &ndash;&gt;
+        <file>${catalina.home}/logs/permission.log</file>
+        &lt;!&ndash; 文件压缩的规则（时间） &ndash;&gt;
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            &lt;!&ndash; 压缩后日志的名称 &ndash;&gt;
+            <FileNamePattern>${catalina.home}/logs/permission.%d{yyyy-MM-dd}.log.gz</FileNamePattern>
+        </rollingPolicy>
+        &lt;!&ndash; 压缩后日志每行的格式 &ndash;&gt;
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </layout>
+    </appender>
+
+    &lt;!&ndash; 指定代码中log_name为该配置中的name时，使用该配置引用的appender &ndash;&gt;
+    <logger name="" level="INFO">
+        <appender-ref ref="permission"/>
+    </logger>-->
+
+    <!-- TRACE < DEBUG < INFO < WARN < ERROR -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

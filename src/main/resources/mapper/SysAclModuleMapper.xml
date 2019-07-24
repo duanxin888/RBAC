@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duanxin.dao.SysAclModuleMapper">
+  <resultMap id="BaseResultMap" type="com.duanxin.model.SysAclModule">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="level" jdbcType="VARCHAR" property="level" />
+    <result column="seq" jdbcType="INTEGER" property="seq" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
+    <result column="operate_ip" jdbcType="VARCHAR" property="operateIp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, parent_id, level, seq, status, remark, operator, operate_time, operate_ip
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_acl_module
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_acl_module
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.duanxin.model.SysAclModule">
+    insert into sys_acl_module (id, name, parent_id, 
+      level, seq, status, 
+      remark, operator, operate_time, 
+      operate_ip)
+    values (#{recordid,jdbcType=INTEGER}, #{recordname,jdbcType=VARCHAR}, #{recordparentId,jdbcType=INTEGER},
+      #{recordlevel,jdbcType=VARCHAR}, #{recordseq,jdbcType=INTEGER}, #{recordstatus,jdbcType=INTEGER},
+      #{recordremark,jdbcType=VARCHAR}, #{recordoperator,jdbcType=VARCHAR}, #{recordoperateTime,jdbcType=TIMESTAMP},
+      #{recordoperateIp,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.duanxin.model.SysAclModule">
+    insert into sys_acl_module
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.id != null">
+        id,
+      </if>
+      <if test="record.name != null">
+        name,
+      </if>
+      <if test="record.parentId != null">
+        parent_id,
+      </if>
+      <if test="record.level != null">
+        level,
+      </if>
+      <if test="record.seq != null">
+        seq,
+      </if>
+      <if test="record.status != null">
+        status,
+      </if>
+      <if test="record.remark != null">
+        remark,
+      </if>
+      <if test="record.operator != null">
+        operator,
+      </if>
+      <if test="record.operateTime != null">
+        operate_time,
+      </if>
+      <if test="record.operateIp != null">
+        operate_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="record.id != null">
+        #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null">
+        #{record.parentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.level != null">
+        #{record.level,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seq != null">
+        #{record.seq,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null">
+        #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null">
+        #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operateTime != null">
+        #{record.operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operateIp != null">
+        #{record.operateIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.duanxin.model.SysAclModule">
+    update sys_acl_module
+    <set>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null">
+        parent_id = #{record.parentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.level != null">
+        level = #{record.level,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seq != null">
+        seq = #{record.seq,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null">
+        operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operateTime != null">
+        operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operateIp != null">
+        operate_ip = #{record.operateIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{record.id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.duanxin.model.SysAclModule">
+    update sys_acl_module
+    set name = #{record.name,jdbcType=VARCHAR},
+      parent_id = #{record.parentId,jdbcType=INTEGER},
+      level = #{record.level,jdbcType=VARCHAR},
+      seq = #{record.seq,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{record.operateIp,jdbcType=VARCHAR}
+    where id = #{record.id,jdbcType=INTEGER}
+  </update>
+
+  <select id="countAclModelByName" parameterType="map" resultType="int">
+    select count(1)
+    from sys_acl_module
+    where `name` = #{name}
+    <if test="parentId != null">
+      and parent_id = #{parentId}
+    </if>
+    <if test="id != null">
+      and id = #{id}
+    </if>
+  </select>
+
+  <select id="getChildListByLevel" parameterType="string" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from sys_acl_module
+    where `level` like #{level} || '.%'
+  </select>
+
+  <update id="batchUpdateLevel" parameterType="map">
+    <foreach collection="modules" item="module" separator=";">
+      update sys_acl_module
+      set  `level` = #{module.level}
+    </foreach>
+  </update>
+
+  <select id="getAclModuleList" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from sys_acl_module
+  </select>
+
+  <select id="countByParentId" resultType="int" parameterType="int">
+    select count(1)
+    from sys_acl_module
+    where parent_id = #{parentId}
+  </select>
+</mapper>

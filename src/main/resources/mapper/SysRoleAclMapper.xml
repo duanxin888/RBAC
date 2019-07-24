@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duanxin.dao.SysRoleAclMapper">
+  <resultMap id="BaseResultMap" type="com.duanxin.model.SysRoleAcl">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="acl_id" jdbcType="INTEGER" property="aclId" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
+    <result column="operate_ip" jdbcType="VARCHAR" property="operateIp" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, role_id, acl_id, operator, operate_time, operate_ip
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role_acl
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_role_acl
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.duanxin.model.SysRoleAcl">
+    insert into sys_role_acl (id, role_id, acl_id, 
+      operator, operate_time, operate_ip
+      )
+    values (#{record.id,jdbcType=INTEGER}, #{record.roleId,jdbcType=INTEGER}, #{record.aclId,jdbcType=INTEGER},
+      #{record.operator,jdbcType=VARCHAR}, #{record.operateTime,jdbcType=TIMESTAMP}, #{record.operateIp,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.duanxin.model.SysRoleAcl">
+    insert into sys_role_acl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.id != null">
+        id,
+      </if>
+      <if test="record.roleId != null">
+        role_id,
+      </if>
+      <if test="record.aclId != null">
+        acl_id,
+      </if>
+      <if test="record.operator != null">
+        operator,
+      </if>
+      <if test="record.operateTime != null">
+        operate_time,
+      </if>
+      <if test="record.operateIp != null">
+        operate_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="record.id != null">
+        #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.roleId != null">
+        #{record.roleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.aclId != null">
+        #{record.aclId,jdbcType=INTEGER},
+      </if>
+      <if test="record.operator != null">
+        #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operateTime != null">
+        #{record.operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operateIp != null">
+        #{record.operateIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.duanxin.model.SysRoleAcl">
+    update sys_role_acl
+    <set>
+      <if test="record.roleId != null">
+        role_id = #{record.roleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.aclId != null">
+        acl_id = #{record.aclId,jdbcType=INTEGER},
+      </if>
+      <if test="record.operator != null">
+        operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operateTime != null">
+        operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operateIp != null">
+        operate_ip = #{record.operateIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{record.id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.duanxin.model.SysRoleAcl">
+    update sys_role_acl
+    set role_id = #{record.roleId,jdbcType=INTEGER},
+      acl_id = #{record.aclId,jdbcType=INTEGER},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{record.operateIp,jdbcType=VARCHAR}
+    where id = #{record.id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getAclIdListByRoleIdList" resultType="int" parameterType="map">
+    select acl_id
+    from sys_role_acl
+    where role_id in
+      <foreach collection="roleIdList" item="roleId" open="(" close=")" separator=",">
+        #{roleId}
+      </foreach>
+  </select>
+
+  <delete id="deleteByRoleId" parameterType="int">
+    delete from sys_role_acl
+    where role_id = #{roleId}
+  </delete>
+
+  <insert id="batchInsert" parameterType="map">
+    insert into sys_role_acl(role_id, acl_id,operator, operate_time, operate_ip)
+    values
+    <foreach collection="roleAclList" item="list" separator=",">
+       (#{list.roleId}, #{list.aclId}, #{list.operator}, #{list.operateTime}, #{list.operateIp})
+    </foreach>
+  </insert>
+
+  <select id="getRoleIdListByAclId" resultType="int" parameterType="int">
+    select role_id
+    from sys_role_acl
+    where acl_id = #{aclId}
+  </select>
+</mapper>

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duanxin.dao.SysAclMapper">
+  <resultMap id="BaseResultMap" type="com.duanxin.model.SysAcl">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="acl_module_id" jdbcType="INTEGER" property="aclModuleId" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="seq" jdbcType="INTEGER" property="seq" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
+    <result column="operate_ip" jdbcType="VARCHAR" property="operateIp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, code, name, acl_module_id, url, type, status, seq, remark, operator, operate_time, 
+    operate_ip
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_acl
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_acl
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.duanxin.model.SysAcl">
+    insert into sys_acl (id, code, name, 
+      acl_module_id, url, type, 
+      status, seq, remark, 
+      operator, operate_time, operate_ip
+      )
+    values (#{record.id,jdbcType=INTEGER}, #{record.code,jdbcType=VARCHAR}, #{record.name,jdbcType=VARCHAR},
+      #{record.aclModuleId,jdbcType=INTEGER}, #{record.url,jdbcType=VARCHAR}, #{record.type,jdbcType=INTEGER},
+      #{record.status,jdbcType=INTEGER}, #{record.seq,jdbcType=INTEGER}, #{record.remark,jdbcType=VARCHAR},
+      #{record.operator,jdbcType=VARCHAR}, #{record.operateTime,jdbcType=TIMESTAMP}, #{record.operateIp,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.duanxin.model.SysAcl">
+    insert into sys_acl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.id != null">
+        id,
+      </if>
+      <if test="record.code != null">
+        code,
+      </if>
+      <if test="record.name != null">
+        name,
+      </if>
+      <if test="record.aclModuleId != null">
+        acl_module_id,
+      </if>
+      <if test="record.url != null">
+        url,
+      </if>
+      <if test="record.type != null">
+        type,
+      </if>
+      <if test="record.status != null">
+        status,
+      </if>
+      <if test="record.seq != null">
+        seq,
+      </if>
+      <if test="record.remark != null">
+        remark,
+      </if>
+      <if test="record.operator != null">
+        operator,
+      </if>
+      <if test="record.operateTime != null">
+        operate_time,
+      </if>
+      <if test="record.operateIp != null">
+        operate_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="record.id != null">
+        #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.code != null">
+        #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aclModuleId != null">
+        #{record.aclModuleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.url != null">
+        #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.seq != null">
+        #{record.seq,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null">
+        #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null">
+        #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operateTime != null">
+        #{record.operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operateIp != null">
+        #{record.operateIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.duanxin.model.SysAcl">
+    update sys_acl
+    <set>
+      <if test="record.code != null">
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aclModuleId != null">
+        acl_module_id = #{record.aclModuleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.url != null">
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.seq != null">
+        seq = #{record.seq,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null">
+        operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operateTime != null">
+        operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operateIp != null">
+        operate_ip = #{record.operateIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{record.id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.duanxin.model.SysAcl">
+    update sys_acl
+    set code = #{record.code,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      acl_module_id = #{record.aclModuleId,jdbcType=INTEGER},
+      url = #{record.url,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      seq = #{record.seq,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{record.operateIp,jdbcType=VARCHAR}
+    where id = #{record.id,jdbcType=INTEGER}
+  </update>
+
+  <select id="countAclByName" resultType="int" parameterType="map">
+    select count(1)
+    from sys_acl
+    where `name` = #{name}
+    <if test="id != null">
+      and id != #{id}
+    </if>
+    <if test="aclModuleId != null">
+      and acl_module_id = #{aclModuleId}
+    </if>
+  </select>
+
+  <select id="getAclListByAclModuleId" parameterType="map" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from sys_acl
+    where acl_module_id = #{aclModuleId}
+    order by seq , `name` asc
+    limit #{page.offset}, #{page.pageSize}
+  </select>
+
+  <select id="countAclByAclModuleId" parameterType="int" resultType="int">
+    select count(1)
+    from sys_acl
+    where acl_module_id = #{aclModuleId}
+  </select>
+
+  <select id="getAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from sys_acl
+  </select>
+
+  <select id="getByIdList" resultMap="BaseResultMap" parameterType="map">
+    select <include refid="Base_Column_List" />
+    from sys_acl
+    where
+    <if test="idList != null">
+      id in
+      <foreach collection="idList" item="id" open="(" separator="," close=")">
+        #{id}
+      </foreach>
+    </if>
+  </select>
+
+  <select id="getByUrl" parameterType="string" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from sys_acl
+    where url = #{url} <!-- url is not null and url != '' and #{url} regexp url -->
+  </select>
+</mapper>

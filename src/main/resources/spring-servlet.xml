@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:annotation-config/>
+
+    <!-- 启动spring mvc注解功能 -->
+    <mvc:annotation-driven/>
+    <!-- 配置自定义拦截器 -->
+    <mvc:interceptors>
+        <bean class="com.duanxin.commons.HttpInterceptor"/>
+    </mvc:interceptors>
+
+    <!-- 启动包扫描路径 -->
+    <context:component-scan base-package="com.duanxin.controller" />
+    <context:component-scan base-package="com.duanxin.service"/>
+    <context:component-scan base-package="com.duanxin.commons"/>
+
+    <!-- 加载applicationContextHelper -->
+    <bean class="com.duanxin.commons.ApplicationContextHelper" lazy-init="false"/>
+
+    <!-- 一些bean的注入 -->
+    <!-- 全局异常注入 -->
+    <bean class="com.duanxin.commons.SpringExceptionResolver"/>
+
+    <!-- 释放静态资源 -->
+    <mvc:default-servlet-handler/>
+
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+    <!-- 对json数据进行处理的视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" id="jsonView"/>
+
+    <!-- 对其他数据进行处理的视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="suffix" value=".jsp"/>
+        <property name="prefix" value="/WEB-INF/views/"/>
+    </bean>
+</beans>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duanxin.dao.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.duanxin.model.SysUser">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
+    <result column="operate_ip" jdbcType="VARCHAR" property="operateIp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, username, telephone, email, password, dept_id, status, remark, operator, operate_time, 
+    operate_ip
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.duanxin.model.SysUser">
+    insert into sys_user (id, username, telephone, 
+      email, password, dept_id, 
+      status, remark, operator, 
+      operate_time, operate_ip)
+    values (#{record.id,jdbcType=INTEGER}, #{record.username,jdbcType=VARCHAR}, #{record.telephone,jdbcType=VARCHAR},
+      #{record.email,jdbcType=VARCHAR}, #{record.password,jdbcType=VARCHAR}, #{record.deptId,jdbcType=INTEGER},
+      #{record.status,jdbcType=INTEGER}, #{record.remark,jdbcType=VARCHAR}, #{record.operator,jdbcType=VARCHAR},
+      #{record.operateTime,jdbcType=TIMESTAMP}, #{record.operateIp,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.duanxin.model.SysUser">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.id != null">
+        id,
+      </if>
+      <if test="record.username != null">
+        username,
+      </if>
+      <if test="record.telephone != null">
+        telephone,
+      </if>
+      <if test="record.email != null">
+        email,
+      </if>
+      <if test="record.password != null">
+        password,
+      </if>
+      <if test="record.deptId != null">
+        dept_id,
+      </if>
+      <if test="record.status != null">
+        status,
+      </if>
+      <if test="record.remark != null">
+        remark,
+      </if>
+      <if test="record.operator != null">
+        operator,
+      </if>
+      <if test="record.operateTime != null">
+        operate_time,
+      </if>
+      <if test="record.operateIp != null">
+        operate_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="record.id != null">
+        #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null">
+        #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null">
+        #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptId != null">
+        #{record.deptId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null">
+        #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null">
+        #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operateTime != null">
+        #{record.operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operateIp != null">
+        #{record.operateIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.duanxin.model.SysUser">
+    update sys_user
+    <set>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null">
+        telephone = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptId != null">
+        dept_id = #{record.deptId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null">
+        operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operateTime != null">
+        operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operateIp != null">
+        operate_ip = #{record.operateIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{record.id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.duanxin.model.SysUser">
+    update sys_user
+    set username = #{record.username,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      `password` = #{record.password,jdbcType=VARCHAR},
+      dept_id = #{record.deptId,jdbcType=INTEGER},
+      `status` = #{record.status,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{record.operateIp,jdbcType=VARCHAR}
+    where id = #{record.id,jdbcType=INTEGER}
+  </update>
+
+  <select id="findByKeyword" resultMap="BaseResultMap" parameterType="string">
+    select
+    <include refid="Base_Column_List" />
+    from sys_user
+    where telephone = #{keyword}
+    or email = #{keyword}
+  </select>
+
+  <select id="countByTelephone" resultType="int" parameterType="map">
+    select count(1)
+    from sys_user
+    where telephone = #{telephone}
+  </select>
+
+  <select id="countByEmail" resultType="int" parameterType="map">
+    select count(1)
+    from sys_user
+    where email = #{email}
+  </select>
+
+  <select id="countByDeptId" parameterType="int" resultType="int">
+    select count(1)
+    from sys_user
+    where dept_id = #{deptId}
+  </select>
+
+  <select id="getPageByDeptId" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from sys_user
+    where dept_id = #{deptId}
+    order by username asc
+    limit #{page.offset}, #{page.pageSize}
+  </select>
+
+  <select id="getByIdList" parameterType="map" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from sys_user
+    where id in
+    <foreach collection="idList" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+  </select>
+
+  <select id="getAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from sys_user
+  </select>
+</mapper>
