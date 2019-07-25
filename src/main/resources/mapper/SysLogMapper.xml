@@ -17,9 +17,11 @@
   <sql id="Base_Column_List">
     id, type, target_id, operator, operate_time, operate_ip, status
   </sql>
+
   <sql id="Blob_Column_List">
     old_value, new_value
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
@@ -28,131 +30,163 @@
     from sys_log
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sys_log
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.duanxin.model.SysLogWithBLOBs">
     insert into sys_log (id, type, target_id, 
       operator, operate_time, operate_ip, 
       status, old_value, new_value
       )
-    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{targetId,jdbcType=INTEGER}, 
-      #{operator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{oldValue,jdbcType=LONGVARCHAR}, #{newValue,jdbcType=LONGVARCHAR}
+    values (#{record.id,jdbcType=INTEGER}, #{record.type,jdbcType=INTEGER}, #{record.targetId,jdbcType=INTEGER},
+      #{record.operator,jdbcType=VARCHAR}, #{record.operateTime,jdbcType=TIMESTAMP}, #{record.operateIp,jdbcType=VARCHAR},
+      #{record.status,jdbcType=INTEGER}, #{record.oldValue,jdbcType=LONGVARCHAR}, #{record.newValue,jdbcType=LONGVARCHAR}
       )
   </insert>
+
   <insert id="insertSelective" parameterType="com.duanxin.model.SysLogWithBLOBs">
     insert into sys_log
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+      <if test="record.id != null">
         id,
       </if>
-      <if test="type != null">
+      <if test="record.type != null">
         type,
       </if>
-      <if test="targetId != null">
+      <if test="record.targetId != null">
         target_id,
       </if>
-      <if test="operator != null">
+      <if test="record.operator != null">
         operator,
       </if>
-      <if test="operateTime != null">
+      <if test="record.operateTime != null">
         operate_time,
       </if>
-      <if test="operateIp != null">
+      <if test="record.operateIp != null">
         operate_ip,
       </if>
-      <if test="status != null">
+      <if test="record.status != null">
         status,
       </if>
-      <if test="oldValue != null">
+      <if test="record.oldValue != null">
         old_value,
       </if>
-      <if test="newValue != null">
+      <if test="record.newValue != null">
         new_value,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
+      <if test="record.id != null">
+        #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
+      <if test="record.type != null">
+        #{record.type,jdbcType=INTEGER},
       </if>
-      <if test="targetId != null">
-        #{targetId,jdbcType=INTEGER},
+      <if test="record.targetId != null">
+        #{record.targetId,jdbcType=INTEGER},
       </if>
-      <if test="operator != null">
-        #{operator,jdbcType=VARCHAR},
+      <if test="record.operator != null">
+        #{record.operator,jdbcType=VARCHAR},
       </if>
-      <if test="operateTime != null">
-        #{operateTime,jdbcType=TIMESTAMP},
+      <if test="record.operateTime != null">
+        #{record.operateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="operateIp != null">
-        #{operateIp,jdbcType=VARCHAR},
+      <if test="record.operateIp != null">
+        #{record.operateIp,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
+      <if test="record.status != null">
+        #{record.status,jdbcType=INTEGER},
       </if>
-      <if test="oldValue != null">
-        #{oldValue,jdbcType=LONGVARCHAR},
+      <if test="record.oldValue != null">
+        #{record.oldValue,jdbcType=LONGVARCHAR},
       </if>
-      <if test="newValue != null">
-        #{newValue,jdbcType=LONGVARCHAR},
+      <if test="record.newValue != null">
+        #{record.newValue,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.duanxin.model.SysLogWithBLOBs">
     update sys_log
     <set>
-      <if test="type != null">
-        type = #{type,jdbcType=INTEGER},
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
       </if>
-      <if test="targetId != null">
-        target_id = #{targetId,jdbcType=INTEGER},
+      <if test="record.targetId != null">
+        target_id = #{record.targetId,jdbcType=INTEGER},
       </if>
-      <if test="operator != null">
-        operator = #{operator,jdbcType=VARCHAR},
+      <if test="record.operator != null">
+        operator = #{record.operator,jdbcType=VARCHAR},
       </if>
-      <if test="operateTime != null">
-        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      <if test="record.operateTime != null">
+        operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="operateIp != null">
-        operate_ip = #{operateIp,jdbcType=VARCHAR},
+      <if test="record.operateIp != null">
+        operate_ip = #{record.operateIp,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
       </if>
-      <if test="oldValue != null">
-        old_value = #{oldValue,jdbcType=LONGVARCHAR},
+      <if test="record.oldValue != null">
+        old_value = #{record.oldValue,jdbcType=LONGVARCHAR},
       </if>
-      <if test="newValue != null">
-        new_value = #{newValue,jdbcType=LONGVARCHAR},
+      <if test="record.newValue != null">
+        new_value = #{record.newValue,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{record.id,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.duanxin.model.SysLogWithBLOBs">
     update sys_log
-    set type = #{type,jdbcType=INTEGER},
-      target_id = #{targetId,jdbcType=INTEGER},
-      operator = #{operator,jdbcType=VARCHAR},
-      operate_time = #{operateTime,jdbcType=TIMESTAMP},
-      operate_ip = #{operateIp,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
-      old_value = #{oldValue,jdbcType=LONGVARCHAR},
-      new_value = #{newValue,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    set type = #{record.type,jdbcType=INTEGER},
+      target_id = #{record.targetId,jdbcType=INTEGER},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{record.operateIp,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      old_value = #{record.oldValue,jdbcType=LONGVARCHAR},
+      new_value = #{record.newValue,jdbcType=LONGVARCHAR}
+    where id = #{record.id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.duanxin.model.SysLog">
-    update sys_log
-    set type = #{type,jdbcType=INTEGER},
-      target_id = #{targetId,jdbcType=INTEGER},
-      operator = #{operator,jdbcType=VARCHAR},
-      operate_time = #{operateTime,jdbcType=TIMESTAMP},
-      operate_ip = #{operateIp,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
+  <select id="countBySearchDto" resultType="int" parameterType="map">
+    select count(1)
+    from sys_log
+    <include refid="queryConditions"/>
+  </select>
+
+  <select id="getPageListBySearchDto" parameterType="map" resultMap="ResultMapWithBLOBs">
+    select <include refid="Base_Column_List" />,<include refid="Blob_Column_List" />
+    from sys_log
+    <include refid="queryConditions"/>
+    order by operate_time desc
+    limit #{page.offset}, #{page.pageSize}
+  </select>
+  
+  <sql id="queryConditions">
+    <where>
+      <if test="dto.type != null">
+        and type = #{dto.type}
+      </if>
+      <if test="dto.beforeSeg != null and dto.beforeSeg != ''">
+        and old_value like #{dto.beforeSeg}
+      </if>
+      <if test="dto.afterSeg != null and dto.afterSeg != ''">
+        and new_value like #{dto.afterSeg}
+      </if>
+      <if test="dto.operator != null and dto.operator != ''">
+        and operator like #{dto.operator}
+      </if>
+      <if test="dto.fromTime != null">
+        and operate_time &gt;= #{dto.fromTime}
+      </if>
+      <if test="dto.toTime != null">
+        and operate_time &lt;= #{dto.toTime}
+      </if>
+    </where>
+  </sql>
 </mapper>

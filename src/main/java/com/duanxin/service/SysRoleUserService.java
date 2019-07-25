@@ -1,12 +1,16 @@
 package com.duanxin.service;
 
+import com.duanxin.beans.LogType;
 import com.duanxin.commons.RequestHolder;
+import com.duanxin.dao.SysLogMapper;
 import com.duanxin.dao.SysRoleUserMapper;
 import com.duanxin.dao.SysUserMapper;
 import com.duanxin.exceptions.ParamException;
+import com.duanxin.model.SysLogWithBLOBs;
 import com.duanxin.model.SysRoleUser;
 import com.duanxin.model.SysUser;
 import com.duanxin.utils.IpUtil;
+import com.duanxin.utils.JsonMapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.apache.commons.collections.CollectionUtils;
@@ -33,7 +37,7 @@ public class SysRoleUserService {
     @Resource
     private SysUserMapper sysUserMapper;
     @Resource
-    private SysLogService sysLogService;
+    private SysLogMapper sysLogMapper;
 
     /**
      * @description 添加用户角色数据
@@ -54,7 +58,7 @@ public class SysRoleUserService {
 
         updateRoleUser(roleId, userIdList);
 
-        sysLogService.saveRoleUserLog(roleId, originUserIdList, userIdList);
+        saveRoleUserLog(roleId, originUserIdList, userIdList);
     }
 
     /**
@@ -99,4 +103,22 @@ public class SysRoleUserService {
         return sysUserMapper.getByIdList(userIdList);
     }
 
+    /**
+     * @description 保存角色用户更新日志
+     * @param [before, after]
+     * @date 2019/7/24 11:32
+     **/
+    private void saveRoleUserLog(int roleId, List<Integer> before, List<Integer> after) {
+        SysLogWithBLOBs sysLog = new SysLogWithBLOBs();
+        sysLog.setType(LogType.TYPE_ROLE_USER);
+        sysLog.setTargetId(roleId);
+        sysLog.setNewValue(after == null ? "" : JsonMapper.obj2String(after));
+        sysLog.setOldValue(before == null ? "" : JsonMapper.obj2String(before));
+        sysLog.setOperateTime(new Date());
+        sysLog.setOperator(RequestHolder.getCurrentUser().getUsername());
+        sysLog.setOperateIp(IpUtil.getRemoteIp(RequestHolder.getCurrentRequest()));
+        sysLog.setStatus(0);
+
+        sysLogMapper.insertSelective(sysLog);
+    }
 }

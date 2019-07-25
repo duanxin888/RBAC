@@ -1,10 +1,14 @@
 package com.duanxin.service;
 
+import com.duanxin.beans.LogType;
 import com.duanxin.commons.RequestHolder;
+import com.duanxin.dao.SysLogMapper;
 import com.duanxin.dao.SysRoleAclMapper;
 import com.duanxin.exceptions.ParamException;
+import com.duanxin.model.SysLogWithBLOBs;
 import com.duanxin.model.SysRoleAcl;
 import com.duanxin.utils.IpUtil;
+import com.duanxin.utils.JsonMapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.apache.commons.collections.CollectionUtils;
@@ -29,7 +33,7 @@ public class SysRoleAclService {
     @Resource
     private SysRoleAclMapper sysRoleAclMapper;
     @Resource
-    private SysLogService sysLogService;
+    private SysLogMapper sysLogMapper;
 
     /**
      * @description 添加角色权限数据
@@ -52,7 +56,7 @@ public class SysRoleAclService {
         // 进行保存操作
         updateRoleAcls(roleId, aclIdList);
 
-        sysLogService.saveRoleAclLog(roleId, originAclIdList, aclIdList);
+        saveRoleAclLog(roleId, originAclIdList, aclIdList);
     }
 
     /**
@@ -80,5 +84,24 @@ public class SysRoleAclService {
         }
 
         sysRoleAclMapper.batchInsert(roleAclList);
+    }
+
+    /**
+     * @description 保存角色权限更新日志
+     * @param [before, after]
+     * @date 2019/7/24 11:32
+     **/
+    private void saveRoleAclLog(Integer roleId, List<Integer> before, List<Integer> after) {
+        SysLogWithBLOBs sysLog = new SysLogWithBLOBs();
+        sysLog.setType(LogType.TYPE_ROLE_ACL);
+        sysLog.setTargetId(roleId);
+        sysLog.setOldValue(before == null ? "" : JsonMapper.obj2String(before));
+        sysLog.setNewValue(after == null ? "" : JsonMapper.obj2String(after));
+        sysLog.setOperateTime(new Date());
+        sysLog.setOperateIp(IpUtil.getRemoteIp(RequestHolder.getCurrentRequest()));
+        sysLog.setOperator(RequestHolder.getCurrentUser().getUsername());
+        sysLog.setStatus(0);
+
+        sysLogMapper.insertSelective(sysLog);
     }
 }
