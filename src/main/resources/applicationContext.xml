@@ -29,7 +29,9 @@
         <property name="minIdle" value="3"/>
         <property name="maxActive" value="20"/>
         <property name="maxWait" value="60000"/>
-        <property name="filters" value="stat,wall"/>
+        <property name="filters" value="stat,wall,config"/>
+        <property name="connectionProperties"
+                  value="config.decrypt=true;config.decrypt.key=${mysql.publicKey}"/>
     </bean>
     <!-- 注入SqlSessionFactory工厂 -->
     <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
