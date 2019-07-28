@@ -1,15 +1,5 @@
-<%@ page import="java.net.URLEncoder" %>
-<%@ page import="org.apache.commons.lang3.StringUtils" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <html lang="zh-CN">
-<%
-    String ret = request.getParameter("ret");
-    if(StringUtils.isNotBlank(ret)) {
-        ret = URLEncoder.encode(ret);
-    } else {
-        ret = "";
-    }
-%>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,7 +31,7 @@
 <body>
 
 <div class="container">
-    <form class="form-signin" action="/login.page?ret=<%=ret%>" method="post">
+    <form class="form-signin" action="/login.page" method="post">
         <h2 class="form-signin-heading">请登陆</h2>
         <label for="inputEmail" class="sr-only">邮箱/电话</label>
         <input type="text" id="inputEmail" class="form-control" placeholder="Email/Telephone" name="username" required autofocus value="${username}">

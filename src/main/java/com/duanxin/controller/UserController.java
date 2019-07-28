@@ -47,14 +47,13 @@ public class UserController {
      **/
     @RequestMapping("/login.page")
     public void login(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        String usernmae = req.getParameter("username");
+        String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        SysUser sysUser = sysUserService.findByKeyword(usernmae);
+        SysUser sysUser = sysUserService.findByKeyword(username);
         String errorMsg = "";
-        String ret = req.getParameter("ret");
 
-        if (StringUtils.isBlank(usernmae)) {
+        if (StringUtils.isBlank(username)) {
             // username为空时
             errorMsg = "用户名不可以为空";
         } else if (StringUtils.isBlank(password)) {
@@ -72,21 +71,13 @@ public class UserController {
         } else {
             // login success
             req.getSession().setAttribute("user", sysUser);
-            if (StringUtils.isNotBlank(ret)) {
-                resp.sendRedirect(ret);
-            } else {
-                // todo:/admin/index.page
-                resp.sendRedirect("/admin/index.page");
-            }
+            resp.sendRedirect("/admin/index.page");
         }
 
         // 当出现error时
         req.setAttribute("errorMsg", errorMsg);
-        req.setAttribute("username", usernmae);
-        if (StringUtils.isNotBlank(ret)) {
-            req.setAttribute("ret", ret);
-        }
-        String path = "singin.jsp";
+        req.setAttribute("username", username);
+        String path = "signin.jsp";
         req.getRequestDispatcher(path).forward(req, resp);
     }
 }
