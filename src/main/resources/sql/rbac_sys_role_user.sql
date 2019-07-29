@@ -1,2 +1,0 @@
-INSERT INTO rbac.sys_role_user (id, role_id, user_id, operator, operate_time, operate_ip) VALUES (7, 8, 1, 'admin', '2019-07-24 07:23:37', '0:0:0:0:0:0:0:1');
-INSERT INTO rbac.sys_role_user (id, role_id, user_id, operator, operate_time, operate_ip) VALUES (8, 1, 3, 'root', '2019-07-24 16:00:14', '0:0:0:0:0:0:0:1');
